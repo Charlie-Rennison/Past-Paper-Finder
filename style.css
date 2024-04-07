@@ -1,0 +1,210 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 150px;
+  height: 30px;
+  border: 1px solid #000;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+}
+
+.button-wrapper,
+.button-wrapper-1 {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.dropdown label {
+  color: black;
+}
+
+.button-subjects {
+  width: 156px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  color: black;
+  background: rgb(31, 145, 55);
+  cursor: pointer;
+  transition: background, box-shadow 0.2s;
+}
+
+/* nice blue 21a6f3  rgb(31, 145, 55);;*/
+
+.dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-content {
+  z-index: 100;
+  position: absolute;
+  top: 100%;
+  background: #a7a7a7;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  display: none;
+}
+
+.dropdown-content span {
+  color: black;
+  display: block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  padding: 7px 0px;
+  transition: background 0.2s;
+}
+
+.dropdown-content span:hover {
+  background: #b5b6b5;
+}
+
+.active {
+  display: inherit;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+
+.find-paper {
+  cursor: pointer;
+  color: black;
+  margin-top: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: box-shadow 0.3s;
+}
+.find-paper:hover {
+  box-shadow: 0 0 10px #000;
+}
+
+.slider-container-outer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.slider-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 330px; /* Adjusted width to accommodate the widest element */
+}
+
+/* Adjusted CSS for the labels */
+.slider-container span {
+  flex: 1; /* Allow the spans to grow equally */
+  text-align: center; /* Center the text */
+}
+
+.span-inactive {
+  opacity: 0.5;
+}
+
+/* W3W Code */
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: transform 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #21914f;
+  box-shadow: 0 0 10px #21914f;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .button-wrapper {
+    flex-direction: column;
+  }
+  .button-wrapper-1 {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .dropdown {
+    margin-top: 5px;
+  }
+  .title {
+    text-align: center;
+    margin-bottom: 0px;
+  }
+}
