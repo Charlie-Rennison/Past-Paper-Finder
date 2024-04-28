@@ -5,86 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Past Paper Finder</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="center-div">
-      <h1 class="title" style="font-size: 30px">
-        Combined Science AQA Paper Finder
-      </h1>
+      <div class="container-main">
+        <div class="title-wrapper">
+          <div class="dropdown title-dropdown">
+            <input class="input-0" type="text" onfocus="toggleDropdown(0)" />
+            <div class="dropdown-content dropdown-content-0">
+              <span onclick="handleSpanClick('Combined Science','titlesubject')"
+                >Combined Science</span
+              ><span
+                onclick="handleSpanClick('Separate Science','titlesubject')"
+                >Separate Science</span
+              >
+              <span onclick="handleSpanClick('Maths','titlesubject')"
+                >Maths</span
+              >
+            </div>
+          </div>
+          <i
+            class="fa fa-caret-down dropdown-icon"
+            style="
+              display: flex;
+              align-items: center;
+              margin-right: 4px;
+              transform: translateX(-20px);
+            "
+            aria-hidden="true"
+          ></i>
+          <div
+            class="dropdown title-dropdown"
+            style="transform: translateX(-10px)"
+          >
+            <input class="input-1" type="text" onfocus="toggleDropdown(1)" />
+            <div class="dropdown-content dropdown-content-1">
+              <span onclick="handleSpanClick('AQA','titleexamboard')">AQA</span
+              ><span onclick="handleSpanClick('Edexcel','titleexamboard')"
+                >Edexcel</span
+              >
+            </div>
+          </div>
+          <i
+            class="fa fa-caret-down dropdown-icon"
+            style="
+              display: flex;
+              align-items: center;
+              margin-right: 4px;
+              transform: translateX(-25px);
+            "
+            aria-hidden="true"
+          ></i>
+          <h1
+            class="title"
+            style="font-size: 30px; transform: translateX(-10px)"
+          >
+            Paper Finder
+          </h1>
+        </div>
 
-      <div class="button-wrapper">
-        <div class="dropdown">
-          <label for="column">Year</label
-          ><input class="input-1" type="text" onfocus="toggleDropdown(1)" />
-          <div class="dropdown-content dropdown-content-1" id="button">
-            <span onclick="handleSpanClick('2018','year')">2018</span>
-            <span onclick="handleSpanClick('2019','year')">2019</span>
-            <span onclick="handleSpanClick('2020','year')">2020</span>
-            <span onclick="handleSpanClick('2021','year')">2021</span>
-            <span onclick="handleSpanClick('2022','year')">2022</span>
+        <div class="button-wrapper">
+          <div class="dropdown">
+            <label for="column">Year</label
+            ><input class="input-2" type="text" onfocus="toggleDropdown(2)" />
+            <div class="dropdown-content dropdown-content-2" id="button">
+              <span onclick="handleSpanClick('2018','year')">2018</span>
+              <span onclick="handleSpanClick('2019','year')">2019</span>
+              <span onclick="handleSpanClick('2020','year')">2020</span>
+              <span onclick="handleSpanClick('2021','year')">2021</span>
+              <span onclick="handleSpanClick('2022','year')">2022</span>
+            </div>
           </div>
-        </div>
 
-        <div class="dropdown">
-          <label for="column">Month</label
-          ><input class="input-2" type="text" onfocus="toggleDropdown(2)" />
-          <div class="dropdown-content dropdown-content-2">
-            <span onclick="handleSpanClick('November','month')">November</span
-            ><span onclick="handleSpanClick('June','month')">June</span>
+          <div class="dropdown">
+            <label for="column">Month</label
+            ><input class="input-3" type="text" onfocus="toggleDropdown(3)" />
+            <div class="dropdown-content dropdown-content-3">
+              <span onclick="handleSpanClick('November','month')">November</span
+              ><span onclick="handleSpanClick('June','month')">June</span>
+            </div>
+          </div>
+          <div class="dropdown">
+            <label for="column">Paper</label
+            ><input class="input-4" type="text" onfocus="toggleDropdown(4)" />
+            <div class="dropdown-content dropdown-content-4">
+              <span onclick="handleSpanClick('1','paper')">1</span
+              ><span onclick="handleSpanClick('2','paper')">2</span>
+            </div>
           </div>
         </div>
-        <div class="dropdown">
-          <label for="column">Paper</label
-          ><input class="input-3" type="text" onfocus="toggleDropdown(3)" />
-          <div class="dropdown-content dropdown-content-3">
-            <span onclick="handleSpanClick('1','paper')">1</span
-            ><span onclick="handleSpanClick('2','paper')">2</span>
+        <div class="button-wrapper-1 active-button-wrapper">
+          <button
+            class="button-subjects button-1 active-button"
+            style="background: rgb(136, 135, 135); box-shadow: none"
+            onclick="toggleButton(1,'rgb(31, 145, 55)')"
+          >
+            Biology</button
+          ><button
+            class="button-subjects button-2"
+            style="background: rgb(136, 135, 135); box-shadow: none"
+            onclick="toggleButton(2,'rgb(199, 44, 44)')"
+          >
+            Chemistry</button
+          ><button
+            class="button-subjects button-3"
+            style="background: rgb(136, 135, 135); box-shadow: none"
+            onclick="toggleButton(3,'rgb(31, 99, 145)')"
+          >
+            Physics
+          </button>
+        </div>
+        <div class="slider-container-outer">
+          <div class="slider-container slider-container-1 slider-active">
+            <span class="span-qp">Question Paper</span>
+            <label class="switch"
+              ><input
+                class="switch-paper"
+                onclick="toggleSlider()"
+                type="checkbox" /><span class="slider round"></span></label
+            ><span class="span-ms span-inactive">Mark Scheme</span>
+          </div>
+          <div class="slider-container slider-container-2 slider-active">
+            <span class="span-foundation">Foundation</span>
+            <label class="switch"
+              ><input
+                class="switch-level"
+                onclick="toggleSlider()"
+                type="checkbox" /><span class="slider round"></span></label
+            ><span class="span-higher span-inactive">Higher</span>
           </div>
         </div>
+        <button class="find-paper" onclick="generateURL()">Find paper</button>
+        <p class="poweredmaths poweredmaths-inactive">
+          Powered by
+          <a target="_blank" href="https://www.mathsgenie.co.uk/"
+            >Maths Genie</a
+          >
+        </p>
+        <p class="error" style="color: red"></p>
       </div>
-      <div class="button-wrapper-1">
-        <button
-          class="button-subjects button-1 active-button"
-          style="background: rgb(136, 135, 135); box-shadow: none"
-          onclick="toggleButton(1,'rgb(31, 145, 55)')"
-        >
-          Biology</button
-        ><button
-          class="button-subjects button-2"
-          style="background: rgb(136, 135, 135); box-shadow: none"
-          onclick="toggleButton(2,'rgb(199, 44, 44)')"
-        >
-          Chemistry</button
-        ><button
-          class="button-subjects button-3"
-          style="background: rgb(136, 135, 135); box-shadow: none"
-          onclick="toggleButton(3,'rgb(31, 99, 145)')"
-        >
-          Physics
-        </button>
-      </div>
-      <div class="slider-container-outer">
-        <div class="slider-container">
-          <span class="span-qp">Question Paper</span>
-          <label class="switch"
-            ><input
-              class="switch-paper"
-              onclick="toggleSlider()"
-              type="checkbox" /><span class="slider round"></span></label
-          ><span class="span-ms span-inactive">Mark Scheme</span>
-        </div>
-        <div class="slider-container">
-          <span class="span-foundation">Foundation</span>
-          <label class="switch"
-            ><input
-              class="switch-level"
-              onclick="toggleSlider()"
-              type="checkbox" /><span class="slider round"></span></label
-          ><span class="span-higher span-inactive">Higher</span>
-        </div>
-      </div>
-      <button class="find-paper" onclick="generateURL()">Find paper</button>
-      <p class="error" style="color: red"></p>
     </div>
 
     <script src="index.js"></script>

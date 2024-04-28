@@ -5,6 +5,40 @@ let type = "QP";
 let level = "F";
 let link = "";
 let subject = "B";
+let title = "Combined Science";
+let code = "";
+let examboard = "AQA";
+
+{
+  /* <i
+  class="fa fa-caret-down"
+  style="display: flex; align-items: center; margin-right: 4px"
+  aria-hidden="true"
+></i>; */
+}
+
+function DefaultTitleValues() {
+  let titleInputsubject = document.querySelector(".input-0");
+  titleInputsubject.value = "Combined Science";
+  let titleInputexamboard = document.querySelector(".input-1");
+  titleInputexamboard.value = "AQA";
+}
+DefaultTitleValues();
+
+function HandleResizeCall() {
+  var input = document.querySelector(".input-0");
+  input.addEventListener("input", resizeInput);
+  resizeInput.call(input);
+
+  var input2 = document.querySelector(".input-1");
+  input2.addEventListener("input", resizeInput);
+  resizeInput.call(input2);
+}
+HandleResizeCall();
+function resizeInput() {
+  this.style.width = this.value.length + 3 + "ch";
+}
+///
 
 function toggleDropdown(inputNumber) {
   let input = document.querySelector(`.dropdown-content-${inputNumber}`);
@@ -20,18 +54,58 @@ window.onclick = function (event) {
   }
 };
 
+function checkFields() {
+  if (title === "Maths") {
+    buttons = document.querySelector(".button-wrapper-1");
+    buttons.classList.remove("active-button-wrapper");
+    if (examboard === "Edexcel") {
+      powered = document.querySelector(".poweredmaths");
+      powered.classList.remove("poweredmaths-inactive");
+    } else {
+      powered = document.querySelector(".poweredmaths");
+      powered.classList.add("poweredmaths-inactive");
+    }
+  } else {
+    slider = document.querySelector(".button-wrapper-1");
+    slider.classList.add("active-button-wrapper");
+    powered = document.querySelector(".poweredmaths");
+    powered.classList.add("poweredmaths-inactive");
+  }
+  console.log(title);
+  console.log(examboard);
+  if (!(title === "Maths") && examboard === "Edexcel") {
+    console.log("true");
+    document.querySelector(".input-1").value = "AQA";
+    examboard = "AQA";
+    HandleResizeCall();
+    error = "Error: Edexcel Doesn't have sciences.";
+    document.querySelector(".error").innerHTML = error;
+  }
+}
+
 function handleSpanClick(spanValue, spanType) {
+  if (spanType == "titlesubject") {
+    title = spanValue;
+    document.querySelector(".input-0").value = spanValue;
+    HandleResizeCall();
+  }
+  if (spanType == "titleexamboard") {
+    examboard = spanValue;
+    document.querySelector(".input-1").value = spanValue;
+    HandleResizeCall();
+  }
   if (spanType == "year") {
     year = spanValue;
-    document.querySelector(".input-1").value = spanValue;
+    document.querySelector(".input-2").value = spanValue;
   } else if (spanType == "month") {
     month = spanValue;
-    document.querySelector(".input-2").value = spanValue;
+    document.querySelector(".input-3").value = spanValue;
   } else if (spanType == "paper") {
     paper = spanValue;
-    document.querySelector(".input-3").value = spanValue;
+    document.querySelector(".input-4").value = spanValue;
   }
   document.querySelector(".active").classList.remove("active");
+  checkFields();
 }
 
 function toggleSlider() {
@@ -63,7 +137,6 @@ function generateURL() {
   let error = "";
   if (year[2] === "1") {
     short_year = year.substring(2, 4);
-    console.log(short_year);
   } else {
     short_year = year.charAt(0) + year.charAt(year.length - 1);
   }
@@ -84,12 +157,12 @@ function generateURL() {
     return;
   }
   document.querySelector(".error").innerHTML = "";
-  link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-8464${subject}${paper}${level}-${type}-${month
-    .substring(0, 3)
-    .toUpperCase()}${short_year}.PDF`;
-  console.log(link);
-  window.open(link);
+  console.log(title);
+  if (title === "Combined Science") combinedScience();
+  else if (title === "Separate Science") seperateScience();
+  else if (title === "Maths") maths();
 }
+
 // https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-8464B1H-QP-JUN18.PDF
 // https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-8464B1H-QP-JUN18.PDF
 // https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-8464B2H-QP-JUN28.PDF
@@ -110,4 +183,65 @@ function toggleButton(buttonNumber, buttonColor) {
   button.style.background = buttonColor;
   button.style.boxShadow = `0 0 10px ${buttonColor}`;
   subject = button.innerText[0];
+}
+
+//Link generators
+
+function maths() {
+  if (examboard === "AQA") {
+    code = "8300";
+    if (Number(year) < 2020 && type === "MS") {
+      link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${paper}${level}-W-${type}-${month
+        .substring(0, 3)
+        .toUpperCase()}${short_year}.PDF`;
+    } else {
+      link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${paper}${level}-${type}-${month
+        .substring(0, 3)
+        .toUpperCase()}${short_year}.PDF`;
+    }
+  } else if (examboard === "Edexcel") {
+    link = `https://www.mathsgenie.co.uk/papers/${paper}${level.toLowerCase()}${month
+      .substring(0, 3)
+      .toLowerCase()}${year}.pdf`;
+  }
+
+  window.open(link);
+}
+
+function seperateScience() {
+  if (subject === "B") code = "8461";
+  else if (subject === "C") code = "8462";
+  else code = "8463";
+  if (Number(year) < 2020 && type === "MS") {
+    link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${paper}${level}-W-${type}-${month
+      .substring(0, 3)
+      .toUpperCase()}${short_year}.PDF`;
+  } else {
+    link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${paper}${level}-${type}-${month
+      .substring(0, 3)
+      .toUpperCase()}${short_year}.PDF`;
+  }
+  window.open(link);
+}
+
+function combinedScience() {
+  code = "8464";
+  if (Number(year) < 2020 && type === "MS") {
+    link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${subject}${paper}${level}-W-${type}-${month
+      .substring(0, 3)
+      .toUpperCase()}${short_year}.PDF`;
+  } else {
+    link = `https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/${year}/${month}/AQA-${code}${subject}${paper}${level}-${type}-${month
+      .substring(0, 3)
+      .toUpperCase()}${short_year}.PDF`;
+  }
+  window.open(link);
+}
+
+function Maths() {
+  if (examboard === "AQA") {
+    return;
+  } else if (examboard === "Edexcel") {
+    return;
+  }
 }

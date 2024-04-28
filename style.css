@@ -11,6 +11,11 @@ body {
   font-weight: 600;
 }
 
+.title-wrapper {
+  display: flex;
+  z-index: 1000000;
+}
+
 input[type="text"] {
   width: 150px;
   height: 30px;
@@ -28,7 +33,12 @@ input[type="text"] {
   align-items: center;
   margin-top: 30px;
 }
-
+.button-wrapper-1 {
+  display: none;
+}
+.poweredmaths-inactive {
+  display: none;
+}
 .dropdown label {
   color: black;
 }
@@ -92,6 +102,15 @@ input[type="text"] {
   justify-content: center;
   height: 100vh;
   align-items: center;
+  flex-direction: row;
+}
+
+.container-main {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+
+  align-items: center;
   flex-direction: column;
 }
 
@@ -122,6 +141,7 @@ input[type="text"] {
   align-items: center;
   gap: 10px;
   width: 330px; /* Adjusted width to accommodate the widest element */
+  display: none;
 }
 
 /* Adjusted CSS for the labels */
@@ -129,9 +149,26 @@ input[type="text"] {
   flex: 1; /* Allow the spans to grow equally */
   text-align: center; /* Center the text */
 }
-
+.slider-active {
+  display: inherit;
+}
+.active-button-wrapper {
+  display: inherit;
+}
 .span-inactive {
   opacity: 0.5;
+}
+
+.title-dropdown input {
+  width: auto;
+  max-width: 100%;
+  border: none;
+  font-size: 31px;
+}
+
+.dropdown-icon {
+  display: flex;
+  align-items: center;
 }
 
 /* W3W Code */
