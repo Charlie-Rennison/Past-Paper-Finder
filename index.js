@@ -9,6 +9,9 @@ let title = "Combined Science";
 let code = "";
 let examboard = "AQA";
 
+let PaperSpan = document.querySelector(".JS-PaperSpan3");
+PaperSpan.classList.add("JS-inactive");
+
 {
   /* <i
   class="fa fa-caret-down"
@@ -45,6 +48,11 @@ function toggleDropdown(inputNumber) {
   let previousinput = document.querySelector(".active");
   if (previousinput) previousinput.classList.remove("active");
   if (!input.classList.contains("active")) input.classList.add("active");
+  let error = document.querySelector(".error"); // maths genie error
+
+  if (error.innerHTML.length > 1) {
+    error.innerHTML = "";
+  }
 }
 
 window.onclick = function (event) {
@@ -58,6 +66,8 @@ function checkFields() {
   if (title === "Maths") {
     buttons = document.querySelector(".button-wrapper-1");
     buttons.classList.remove("active-button-wrapper");
+    PaperSpan = document.querySelector(".JS-PaperSpan3");
+    PaperSpan.classList.remove("JS-inactive");
     if (examboard === "Edexcel") {
       powered = document.querySelector(".poweredmaths");
       powered.classList.remove("poweredmaths-inactive");
@@ -66,10 +76,12 @@ function checkFields() {
       powered.classList.add("poweredmaths-inactive");
     }
   } else {
-    slider = document.querySelector(".button-wrapper-1");
+    let slider = document.querySelector(".button-wrapper-1");
     slider.classList.add("active-button-wrapper");
-    powered = document.querySelector(".poweredmaths");
+    let powered = document.querySelector(".poweredmaths");
     powered.classList.add("poweredmaths-inactive");
+    let PaperSpan = document.querySelector(".JS-PaperSpan3");
+    PaperSpan.classList.add("JS-inactive");
   }
   console.log(title);
   console.log(examboard);
@@ -200,9 +212,13 @@ function maths() {
         .toUpperCase()}${short_year}.PDF`;
     }
   } else if (examboard === "Edexcel") {
-    link = `https://www.mathsgenie.co.uk/papers/${paper}${level.toLowerCase()}${month
-      .substring(0, 3)
-      .toLowerCase()}${year}.pdf`;
+    if (year === "2020") {
+      month = ""; //Handles contingency in 2020 papers
+    }
+    if (month === "november") {
+      month = month.substring(0, 3);
+    }
+    link = `https://www.mathsgenie.co.uk/papers/${paper}${level.toLowerCase()}${month.toLowerCase()}${year}.pdf`;
   }
 
   window.open(link);

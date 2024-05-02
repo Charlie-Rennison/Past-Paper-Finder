@@ -199,6 +199,9 @@ input[type="text"] {
   background-color: #ccc;
   transition: background-color 0.4s;
 }
+.JS-inactive {
+  display: none;
+}
 
 .slider:before {
   position: absolute;
